@@ -1,0 +1,110 @@
+/* STREAMERS
+---------------------------------------*/
+
+.side .md ul:nth-of-type(2) {
+    color: rgba(255,255,255,.7);
+    position: fixed;
+    bottom: calc(0%);
+    right: 50px;
+    /*left: 50px;*/
+    background-color: rgba(0,0,0,.95) !important;
+    padding: 30px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05),0 -1px 0 rgba(0,0,0,0.2),inset 1px 0 0 rgba(0,0,0,0.2),inset -1px 0 0 rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 101;
+    border-radius: 30px;
+    list-style-type: none;
+    margin-left: 50px;
+    margin-bottom: 0;
+    /*height: 300px;*/
+    transition: all 0.3s ease;
+    transform: translate(0, 100%);
+}
+
+.side .md ul:nth-of-type(2):hover {
+    transform: translate(0, 0);
+}
+
+.side .md ul:nth-of-type(2)::before {
+    content: "Dirty Sion TV";
+    font-size: 24px;
+    position: absolute;
+    bottom: 99%;
+    right: 20px;
+    width: 350px;
+    height: 0;
+    border-bottom: 100px solid rgba(0,0,0,.95);
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    line-height: 4em;
+}
+
+.side .md ul:nth-of-type(2) a {
+    color: rgb(210, 90, 50);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li {
+    font-weight: bold;
+    font-size: medium;
+}
+
+.side .md ul:nth-of-type(2) li ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side .md ul:nth-of-type(2) li ul li {
+    float: left;
+    margin: 5px;
+    font-size: small !important;
+    font-weight: normal;
+    width: 320px;
+    /*cursor: pointer;*/
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(1) a::before {
+    content: url(%%thumb0%%);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(2) a::before {
+    content: url(%%thumb1%%);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(3) a::before {
+    content: url(%%thumb2%%);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(4) a::before {
+    content: url(%%thumb3%%);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(5) a::before {
+    content: url(%%thumb4%%);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(6) a::before {
+    content: url(%%thumb5%%);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(7) a::before {
+    content: url(%%thumb6%%);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(8) a::before {
+    content: url(%%thumb7%%);
+    display: block;
+}
+
+.side .md ul:nth-of-type(2) li ul > li:nth-of-type(9) a::before {
+    content: url(%%thumb8%%);
+    display: block;
+}
