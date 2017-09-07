@@ -11,9 +11,7 @@ from AposRedditBotSettings import APP_ID, APP_SECRET, APP_URI, APP_REFRESH, USER
 from AposStreamerRules import streamerList, gameName, textInTitle, offlineMessage, onlineMessage
 
 def login():
-    r = praw.Reddit(USERAGENT)
-    r.set_oauth_app_info(APP_ID, APP_SECRET, APP_URI)
-    r.refresh_access_information(APP_REFRESH)
+    r = praw.Reddit(client_id=APP_ID, client_secret=APP_SECRET, refresh_token=APP_REFRESH, user_agent=USERAGENT)
 
     print("Logged in")
 
@@ -63,7 +61,7 @@ def isStreamOnline(stream):
         return False
 
 def changeSidebar(r, s, t):
-    r.get_subreddit(s).update_settings(description=t)
+    r.subreddit(s).mod.update(description=t)
     print("Sidebar updated")
 
 def loadSidebar():
@@ -71,40 +69,34 @@ def loadSidebar():
         data = sidebartext.read()
         return data
 
+def loadStylesheet():
+    with open('Stylesheet.txt', 'r', encoding='utf-8') as stylesheetText:
+        data = stylesheetText.read()
+        return data
+
 def downloadTwitchThumb(stream, index):
     f = open('thumb%s.jpg' % index,'wb')
     f.write(requests.get(stream['stream']['preview']['medium']).content)
     f.close()
 
-def uploadImage(r, s, path, name):
-    r.upload_image(s, path, name)
+def uploadImage(r, s, name, path):
+    r.subreddit(s).stylesheet.upload(name, path)
 
 def setStreamThumb(r, s, stream, index):
-    #r.delete_image(s, 'thumb%s' % index)
-    #print ("Previous thumb deleted.")
     downloadTwitchThumb(stream, index)
     print("Got new thumb.")
     try:
-        uploadImage(r, s, 'thumb%s.jpg' % index, 'thumb%s' % index)
+        uploadImage(r, s, 'thumb%s' % index, 'thumb%s.jpg' % index)
         print("Uploaded new thumb!")
     except:
-        print("Couldn't upload the new thumb...")
+        print("Couldn't upload the new thumb...", sys.exc_info()[0])
 
-tokentime = time.time()
 r = login()
 
 sidebar = loadSidebar()
+stylesheet = loadStylesheet()
 
 while True:
-    if (time.time() - tokentime) > 3600:
-        try:
-            tokentime = time.time()
-            r.refresh_access_information(APP_REFRESH)
-            print("Token refreshed!")
-        except:
-            print("Couldn't get a new token, let's log in again.")
-            r = login()
-
     newSidebar = ""
 
     streamList = []
@@ -142,7 +134,7 @@ while True:
     if len(streamList) != 0:
         try:
             print("Trying to reset Stylesheet.")
-            r.get_subreddit(SUBREDDIT).set_stylesheet(r.get_subreddit(SUBREDDIT).get_stylesheet()['stylesheet'])
+            r.subreddit(SUBREDDIT).stylesheet.update(stylesheet)
             print("Stylesheet was reset!")
         except:
             print("Error trying to reset Stylesheet.")
