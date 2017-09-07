@@ -70,7 +70,7 @@ def loadSidebar():
         return data
 
 def loadStylesheet():
-    with open('Stylesheet.txt', 'r', encoding='utf-8') as stylesheetText:
+    with open('Reddit.css', 'r', encoding='utf-8') as stylesheetText:
         data = stylesheetText.read()
         return data
 
